@@ -15,8 +15,8 @@ module.exports.cpa=function(){
     return new Promise((resolve, reject) => {
         let cpa=[];
         for(i in students ){
-            if(students[i]["isprogram"]==true)
-            cpa.push(cpa[i]);
+            if(students[i]["program"]=="CPA")
+            cpa.push(students[i]);
         }
         if(students.length==0){
             reject("no results returned");
@@ -25,16 +25,19 @@ module.exports.cpa=function(){
     })
 }
 
-module.exports.gpa=function(){
+module.exports.highGPA=function(){
     return new Promise((resolve, reject) => {
-        let gpa=[];
+        let gpa;
+        index=-1;
+        let highest=-100.000;
         for(i in students ){
-            if(students[i]["isprogram"]==true)
-            gpa.push(gpa[i]);
+            if(students[i]["gpa"]>highest)
+            index=i;
+            highest=students[i]["gpa"];
         }
-        if(students.length==0){
+        if(index==-1){
             reject("no results returned");
         }
-        resolve(gpa);
+        resolve(students[index]);
     })
 }
