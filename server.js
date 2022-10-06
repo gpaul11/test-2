@@ -7,7 +7,17 @@ var data=require("./data_prep");
 function onHttpStart() {
   console.log("Express http server listening on: " + HTTP_PORT);
 }
+app.get("/cpa", function(req,res){
+  data.cpa().then(function(data){
+    res.json(data);
+  })
+});
 
+app.get("/GPA", function(req,res){
+  data.highGPA().then(function(data){
+    res.json(data);
+  })
+});
 app.get("/", function(req,res){
     res.sendFile(path.join(__dirname,"/views/home.html"));
 });
